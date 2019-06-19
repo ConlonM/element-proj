@@ -12,6 +12,9 @@
 				<el-form-item>
 					<el-button type="primary" @click="handleAdd">新增</el-button>
 				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" @click="getUser(1)"></el-button>
+				</el-form-item>
 			</el-form>
 		</el-col>
 
@@ -107,7 +110,7 @@
 <script>
 	import util from '../../common/js/util'
 	//import NProgress from 'nprogress'
-	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
+	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser,getUserByID } from '../../api/api';
 
 	export default {
 		data() {
@@ -289,8 +292,19 @@
 				}).catch(() => {
 
 				});
+			},
+			getUser:function(id){
+				var para ={
+					id:id
+				};
+	
+				getUserByID(para).then((res)=>{
+
+					this.filters.name = res.data.Name;
+				})
 			}
-		},
+			
+			},
 		mounted() {
 			this.getUsers();
 		}
