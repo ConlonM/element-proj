@@ -1,6 +1,8 @@
 import Login from './views/Login.vue'
 import NotFound from './views/404.vue'
-import LeftNav from './views/Layout/LeftNav.vue'
+import DefaultLayout from './views/Layout/Default.vue'
+import LeftNavLayout from './views/Layout/LeftNav.vue'
+
 import Main from './views/Main.vue'
 import Table from './views/nav1/Table.vue'
 import Form from './views/nav1/Form.vue'
@@ -26,7 +28,7 @@ let routes = [
     //{ path: '/main', component: Main },
     {
         path: '/',
-        component: LeftNav,
+        component: DefaultLayout,
         name: '导航一',
         iconCls: 'el-icon-message',//图标样式class
         children: [
@@ -37,8 +39,20 @@ let routes = [
         ]
     },
     {
+        path: '/left',
+        component: LeftNavLayout,
+        name: '导航一',
+        iconCls: 'el-icon-message',//图标样式class
+        children: [
+            { path: '/left/main', component: Main, name: '主页', hidden: true },
+            { path: '/left/table', component: Table, name: 'Table' },
+            { path: '/left/form', component: Form, name: 'Form' },
+            { path: '/left/user', component: user, name: '列表' },
+        ]
+    },
+    {
         path: '/',
-        component: LeftNav,
+        component: DefaultLayout,
         name: '导航二',
         iconCls: 'fa fa-id-card-o',
         children: [
@@ -48,7 +62,7 @@ let routes = [
     },
     {
         path: '/',
-        component: LeftNav,
+        component: DefaultLayout,
         name: '',
         iconCls: 'fa fa-address-card',
         leaf: true,//只有一个节点
@@ -58,7 +72,7 @@ let routes = [
     },
     {
         path: '/',
-        component: LeftNav,
+        component: DefaultLayout,
         name: 'Charts',
         iconCls: 'fa fa-bar-chart',
         children: [
